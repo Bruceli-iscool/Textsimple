@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Editor - TextSimple Style</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #f7f7f7;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    #header {
+      background-color: #333;
+      color: white;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #container {
+      flex: 1;
+      display: flex;
+    }
+
+    #editor {
+      flex: 1;
+      padding: 20px;
+      background-color: #fff;
+      color: #333;
+    }
+
+    .code-area {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background-color: #f7f7f7;
+      color: #333;
+      padding: 10px;
+      box-sizing: border-box;
+      resize: none;
+    }
+
+    #run-button {
+      padding: 10px;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+      background-color: #007acc;
+      transition: background-color 0.3s;
+    }
+
+    #run-button:hover {
+      background-color: #005580;
+    }
+
+    #file-toolbar {
+      display: flex;
+      margin-top: 10px;
+    }
+
+    .file-button {
+      padding: 8px;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 10px;
+      background-color: #007acc;
+      transition: background-color 0.3s;
+    }
+
+    .file-button:hover {
+      background-color: #005580;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="header">
+    <div id="file-toolbar">
+      <button class="file-button" onclick="uploadFile()">Open</button>
+      <button class="file-button" onclick="saveFile()">Save</button>
+      <button class="file-button" onclick="saveAs()">Save As</button>
+    </div>
+  </div>
+
+  <div id="container">
+    <div id="editor">
+      <textarea id="htmlCode" class="code-area" placeholder="Type HTML code here..."></textarea>
+      <textarea id="cssCode" class="code-area" placeholder="Type CSS code here..."></textarea>
+      <textarea id="jsCode" class="code-area" placeholder="Type JavaScript code here..."></textarea>
+      <button id="run-button" onclick="runCode()">Run Code</button>
+    </div>
+  </div>
+
+  <script>
+    function uploadFile() {
+      alert('Opening file');
+    }
+
+    function saveFile() {
+      alert('Saving file');
+    }
+
+    function saveAs() {
+      const fileName = prompt('Enter a file name:');
+      if (fileName) {
+        alert('Saving file as: ' + fileName);
+      }
+    }
+
+    function runCode() {
+      const htmlCode = document.getElementById('htmlCode').value;
+      const cssCode = document.getElementById('cssCode').value;
+      const jsCode = document.getElementById('jsCode').value;
+
+      const resultFrame = document.createElement('iframe');
+      resultFrame.style.width = '100%';
+      resultFrame.style.height = '100%';
+      resultFrame.style.border = 'none';
+
+      document.body.appendChild(resultFrame);
+
+      const resultDocument = resultFrame.contentDocument;
+      const resultBody = resultDocument.body;
+
+      resultBody.innerHTML = `
+        <style>${cssCode}</style>
+        ${htmlCode}
+        <script>${jsCode}</script>
+      `;
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
