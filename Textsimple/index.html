@@ -98,6 +98,12 @@
 <script>
   var quill = new Quill('#editor', {
     theme: 'snow',
+    modules: {
+      toolbar: [
+        [{ 'font': [] }],
+        ['bold', 'italic', 'underline', 'link'],
+      ],
+    },
   });
 
   document.getElementById('editor').addEventListener('input', function () {
@@ -133,6 +139,11 @@
     }
   });
 
+  document.getElementById('fontSelect').addEventListener('change', function (e) {
+    const fontValue = e.target.value;
+    quill.format('font', fontValue);
+  });
+
   function toggleFileMenu() {
     const fileMenuContent = document.getElementById('fileMenuContent');
     fileMenuContent.style.display = (fileMenuContent.style.display === 'block') ? 'none' : 'block';
@@ -162,16 +173,6 @@
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
   }
-    window.addEventListener('beforeunload', function (e) {
-    if (localStorage.getItem('editorContent') !== quill.root.innerHTML) {
-      const confirmationMessage = 'You have unsaved changes. Are you sure you want to leave?';
-      e.returnValue = confirmationMessage;
-      return confirmationMessage;
-  }
-});
-window.addEventListener('beforeunload', function () {
-    localStorage.removeItem('editorContent');
-  });
 </script>
 
 </body>
